@@ -1,0 +1,53 @@
+import os
+import time
+import pygame
+import random
+import ctypes
+
+def exibir_mensagem_assustadora():
+    print("Atenção! Seu computador foi infectado por um vírus terrível!")
+    pygame.mixer.music.load('L.mp3')  # Substitua 'L.mp3' pelo nome do seu arquivo de áudio
+    pygame.mixer.music.play()
+    time.sleep(2)  # Duração do áudio
+    pygame.mixer.music.stop()
+    print("Todos os seus arquivos serão apagados em 3... 2... 1...")
+    time.sleep(3)
+    print("Apenas brincando! Não se preocupe, seu computador está seguro. :)")
+
+# Inicializa o mixer de áudio do pygame
+pygame.mixer.init()
+
+# Número de vezes que o arquivo será aberto
+num_aberturas = 5
+
+for i in range(num_aberturas):
+    os.startfile("Hi.exe")
+    exibir_mensagem_assustadora()
+
+    # Simula problemas técnicos temporários (opção 4)
+    time.sleep(2)
+    ctypes.windll.user32.MessageBoxW(0, "Erro fatal! O sistema encontrou um problema e precisa ser reiniciado.", "Erro", 0x10)
+
+    # Interação com o teclado e mouse (opção 5)
+    time.sleep(3)
+    ctypes.windll.user32.SetCursorPos(0, 0)  # Move o cursor para a posição (0, 0)
+    time.sleep(1)
+    ctypes.windll.user32.mouse_event(0x0002, 0, 0, 0, 0)  # Simula um clique do mouse
+    time.sleep(1)
+    ctypes.windll.user32.keybd_event(0x20, 0, 0, 0)  # Simula a pressão da tecla de espaço
+    time.sleep(1)
+    ctypes.windll.user32.keybd_event(0x20, 0, 0x0002, 0)  # Simula a liberação da tecla de espaço
+
+    # Efeitos visuais assustadores (opção 2)
+    time.sleep(2)
+    ctypes.windll.user32.MessageBoxW(0, "CUIDADO! Um vírus foi detectado em seu sistema!", "Vírus Detectado", 0x10 | 0x30)
+
+    # Mensagens pop-up (opção 1)
+    time.sleep(2)
+    ctypes.windll.user32.MessageBoxW(0, "Seu computador está em risco! Pressione OK para continuar.", "Atenção", 0x10)
+
+# Aguarda o tempo de exibição da mensagem antes de fechar os arquivos
+time.sleep(10)
+
+# Fecha todos os arquivos abertos
+os.system("taskkill /F /IM Hi.exe")
